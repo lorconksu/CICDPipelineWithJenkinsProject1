@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh "docker build -t lorconksu/CICDPipelineWithJenkinsProject1:${env.BUILD_ID} ."
+        sh "docker build -t lorconksu/cicdpipelinewithjenkinsproject1:${env.BUILD_ID} ."
       }
     }
     stage('Login') {
@@ -20,12 +20,12 @@ pipeline {
     }
     stage('Push') {
       steps {
-        sh "docker push lorconksu/CICDPipelineWithJenkinsProject1:${env.BUILD_ID}"
+        sh "docker push lorconksu/cicdpipelinewithjenkinsproject1:${env.BUILD_ID}"
       }
     }
     stage('Deploy to OCP') {
       steps {
-        sh "oc set image deployment.apps/CICD-Pipeline-training-project1 CICDPipelineWithJenkinsProject1=lorconksu/CICDPipelineWithJenkinsProject1:${env.BUILD_ID} --kubeconfig /var/lib/jenkins/kubeconfig"
+        sh "oc set image deployment.apps/CICD-Pipeline-training-project1 CICDPipelineWithJenkinsProject1=lorconksu/cicdpipelinewithjenkinsproject1:${env.BUILD_ID} --kubeconfig /var/lib/jenkins/kubeconfig"
       }
     }
   }
